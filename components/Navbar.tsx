@@ -1,11 +1,15 @@
+"use client";
+
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
-import { SidebarTrigger } from "./ui/sidebar";
+import { SidebarTrigger, useSidebar } from "./ui/sidebar";
 
 const Navbar = () => {
+  const { state } = useSidebar();
+
   return (
     <nav className="w-full flex items-center justify-between h-18">
       <div className="text-white">
-        <SidebarTrigger />
+        <SidebarTrigger className={state === "expanded" ? "hidden" : "block"} />
       </div>
       <div className="">
         <h1 className="text-2xl md:text-3xl  text-text-primary font-bold">
