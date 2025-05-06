@@ -4,6 +4,8 @@ import { useState, useCallback } from "react";
 import ChatInput from "./ChatInput";
 import { ChatState, Message } from "@/lib/types";
 import ChatMessage from "./ChatMessageComponent";
+import { ScrollArea } from "./ui/scroll-area";
+import { Scroll } from "lucide-react";
 
 const API_URL = "/api/chat";
 
@@ -50,11 +52,14 @@ export default function ChatInterface() {
           messages: [...prev.messages, aiMessage],
           isLoading: false,
         }));
-      } catch (error: any) {
+      } catch (error) {
         setChatState((prev) => ({
           ...prev,
           isLoading: false,
-          error: error.message || "An unexpected error occurred",
+          error:
+            error instanceof Error
+              ? error.message
+              : "An unexpected error occurred",
         }));
       }
     },
@@ -62,9 +67,9 @@ export default function ChatInterface() {
   );
 
   return (
-    <div className="flex flex-col h-full w-full mx-auto p-4">
+    <div className="flex flex-col h-[90vh] w-full mx-auto p-4">
       <div className=" p-6 flex-1 flex flex-col">
-        <div className="flex-1 overflow-y-auto mb-4 space-y-4">
+        <ScrollArea className="flex-1  mb-4 space-y-4">
           {chatState.messages.length === 0 ? (
             <div className="text-center text-gray-500 my-10">
               <p>Start a conversation with the AI</p>
@@ -72,7 +77,7 @@ export default function ChatInterface() {
           ) : (
             chatState.messages.map((msg, index) => (
               <div key={index} className="flex w-full">
-                {/* <ChatMessage message={msg} /> */}
+                <ChatMessage message={msg} />
               </div>
             ))
           )}
@@ -88,12 +93,11 @@ export default function ChatInterface() {
               Error: {chatState.error}
             </div>
           )}
+          <Scroll orientation="vertical" />
+        </ScrollArea>
+        <div className="sticky bottom-0  z-10">
+          <ChatInput onSend={sendMessage} isLoading={chatState.isLoading} />
         </div>
-
-        {/* <ChatInput
-          onSendMessage={sendMessage}
-          isLoading={chatState.isLoading}
-        /> */}
       </div>
     </div>
   );

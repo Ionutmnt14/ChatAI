@@ -1,4 +1,5 @@
 import { Message } from "@/lib/types";
+import ReactMarkdown from "react-markdown";
 
 export default function ChatMessage({ message }: { message: Message }) {
   const isAssistant = message.role === "assistant";
@@ -10,14 +11,13 @@ export default function ChatMessage({ message }: { message: Message }) {
       }`}
     >
       <div
-        className={`w-full max-w-lg p-4 rounded-lg ${
-          isAssistant ? "bg-blue-500 text-white " : "bg-gray-200 text-gray-800"
+        className={`w-auto p-3 rounded-2xl rounded-tr-md ${
+          isAssistant ? " text-white " : "bg-bg-secondary text-white text-8xl"
         }`}
       >
-        <div className="text-sm font-bold mb-1">
-          {isAssistant ? "AI Assistant" : "You"}
+        <div className="prose prose-invert">
+          <ReactMarkdown>{message.content}</ReactMarkdown>
         </div>
-        <div className="whitespace-pre-wrap">{message.content}</div>
       </div>
     </div>
   );

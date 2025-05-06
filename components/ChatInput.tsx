@@ -1,48 +1,48 @@
-"use client";
-
-import { useState } from "react";
+import { Plus, Mic } from "lucide-react";
+import React, { useState } from "react";
 
 interface ChatInputProps {
-  onSendMessage: (message: string) => void;
-  isLoading: boolean;
+  onSend: (message: string) => void;
+  isLoading?: boolean;
 }
 
-export default function ChatInput({
-  onSendMessage,
-  isLoading,
-}: ChatInputProps) {
-  const [input, setInput] = useState("");
+const ChatInput: React.FC<ChatInputProps> = ({ onSend, isLoading }) => {
+  const [value, setValue] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (input.trim() && !isLoading) {
-      onSendMessage(input.trim());
-      setInput("");
+  const handleSend = () => {
+    if (value.trim() && !isLoading) {
+      onSend(value);
+      setValue("");
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") handleSend();
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="flex mt-4">
+    <div className="flex items-center rounded-2xl bg-bg-secondary border border-text-placeholder px-4 py-3 w-full shadow-sm">
+      {/* Left icons */}
+      <div className="flex items-center gap-2 mr-3">
+        <button className="text-gray-400 hover:text-white" tabIndex={-1}>
+          <Plus size={20} />
+        </button>
+      </div>
+      {/* Input */}
       <input
-        type="text"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-        placeholder="Type your message..."
+        className="flex-1 bg-transparent outline-none text-white placeholder:text-gray-400 text-base"
+        placeholder="Ask anything"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        onKeyDown={handleKeyDown}
         disabled={isLoading}
-        aria-label="Chat input"
-        className="flex-1 p-3 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
       />
-      <button
-        type="submit"
-        disabled={isLoading || !input.trim()}
-        className={`px-4 py-3 rounded-r-lg bg-blue-500 text-white font-medium transition ${
-          isLoading || !input.trim()
-            ? "opacity-50 cursor-not-allowed"
-            : "hover:bg-blue-600"
-        }`}
-      >
-        {isLoading ? "Thinking..." : "Send"}
+      {/* Right icon */}
+      <button className="ml-3 text-gray-400 hover:text-white" tabIndex={-1}>
+        <Mic size={20} />
       </button>
-    </form>
+    </div>
   );
-}
+};
+
+export default ChatInput;

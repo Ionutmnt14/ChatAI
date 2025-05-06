@@ -1,8 +1,9 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react";
+import { Calendar, Home, Inbox, Search, Settings, Plus } from "lucide-react";
 
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -34,11 +35,6 @@ const items = [
     url: "#",
     icon: Search,
   },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
-  },
 ];
 
 export function AppSidebar() {
@@ -46,14 +42,17 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-white">
-            <SidebarTrigger />
-            Application
+          <SidebarGroupLabel className="text-white flex items-center justify-between h-14">
+            <SidebarTrigger className="hover:bg-text-primary  rounded-md  transition-all duration-300" />
+            <Plus
+              style={{ width: "28px", height: "28px" }}
+              className="hover:bg-text-primary hover:text-black rounded-md  transition-all duration-300"
+            />
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
+                <SidebarMenuItem key={item.title} className="text-white">
                   <SidebarMenuButton asChild>
                     <a href={item.url}>
                       <item.icon />
@@ -66,6 +65,14 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <div
+          style={{ width: "28px", height: "28px" }}
+          className="text-white pl-0.5 pt-0.5 self-end hover:bg-text-primary hover:text-black rounded-md transition-all duration-300"
+        >
+          <Settings />
+        </div>
+      </SidebarFooter>
     </Sidebar>
   );
 }
