@@ -1,6 +1,6 @@
 import ChatInterface from "@/components/ChatInterface";
 import Navbar from "@/components/Navbar";
-import { AppSidebar } from "@/components/Sidebar";
+import { AppSidebar } from "@/components/sidebar/Sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 
 export default function Home() {

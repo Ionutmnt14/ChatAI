@@ -1,7 +1,13 @@
 "use client";
 
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
 import { SidebarTrigger, useSidebar } from "./ui/sidebar";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 const Navbar = () => {
   const { state } = useSidebar();
@@ -9,11 +15,18 @@ const Navbar = () => {
   return (
     <nav className="w-full flex items-center justify-between h-18 p-2.5 sticky">
       <div className="text-white">
-        <SidebarTrigger
-          className={`${
-            state === "expanded" ? "hidden" : "block"
-          } hover:bg-text-primary rounded-md pl-0.5 transition-all duration-300`}
-        />
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <SidebarTrigger
+                className={`${
+                  state === "expanded" ? "hidden" : "block"
+                } hover:bg-text-primary rounded-sm pl-0.5 transition-all duration-300`}
+              />
+            </TooltipTrigger>
+            <TooltipContent>Open sidebar</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
       <div className="">
         <h1 className="text-2xl md:text-3xl  text-text-primary font-bold">
@@ -21,15 +34,15 @@ const Navbar = () => {
         </h1>
       </div>
       <div className="flex items-center justify-center">
-        <HoverCard>
-          <HoverCardTrigger>
+        <Popover>
+          <PopoverTrigger>
             <p className="w-14 h-14 bg-white rounded-full" />
-          </HoverCardTrigger>
-          <HoverCardContent className="flex flex-col">
+          </PopoverTrigger>
+          <PopoverContent className="flex flex-col w-auto gap-2">
             <button>logout</button>
             <button>dfgdfg</button>
-          </HoverCardContent>
-        </HoverCard>
+          </PopoverContent>
+        </Popover>
       </div>
     </nav>
   );

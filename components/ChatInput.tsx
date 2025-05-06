@@ -21,7 +21,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSend, isLoading }) => {
   };
 
   return (
-    <div className="flex items-center rounded-2xl bg-bg-secondary border border-text-placeholder px-4 py-3 w-full shadow-sm">
+    <div className="flex items-center rounded-2xl bg-bg-secondary px-4 py-3 w-full shadow-sm">
       {/* Left icons */}
       <div className="flex items-center gap-2 mr-3">
         <button className="text-gray-400 hover:text-white" tabIndex={-1}>

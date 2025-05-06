@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox, Search, Settings, Plus } from "lucide-react";
+import { Calendar, Home, Inbox, Search } from "lucide-react";
 
 import {
   Sidebar,
@@ -10,8 +10,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarTrigger,
 } from "@/components/ui/sidebar";
+import SidebarSettings from "@/components/sidebar/SidebarSettings";
+import SidebarHeader from "./SidebarHeader";
 
 // Menu items.
 const items = [
@@ -42,12 +43,8 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel className="text-white flex items-center justify-between h-14">
-            <SidebarTrigger className="hover:bg-text-primary  rounded-md  transition-all duration-300" />
-            <Plus
-              style={{ width: "28px", height: "28px" }}
-              className="hover:bg-text-primary hover:text-black rounded-md  transition-all duration-300"
-            />
+          <SidebarGroupLabel className="text-white h-14">
+            <SidebarHeader />
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -65,13 +62,8 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
-        <div
-          style={{ width: "28px", height: "28px" }}
-          className="text-white pl-0.5 pt-0.5 self-end hover:bg-text-primary hover:text-black rounded-md transition-all duration-300"
-        >
-          <Settings />
-        </div>
+      <SidebarFooter className="text-white flex items-end justify-center h-14">
+        <SidebarSettings />
       </SidebarFooter>
     </Sidebar>
   );

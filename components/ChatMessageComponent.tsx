@@ -11,7 +11,7 @@ export default function ChatMessage({ message }: { message: Message }) {
       }`}
     >
       <div
-        className={`w-auto p-3 rounded-2xl rounded-tr-md ${
+        className={`w-auto px-4 py-2 rounded-full rounded-tr-md ${
           isAssistant ? " text-white " : "bg-bg-secondary text-white text-8xl"
         }`}
       >

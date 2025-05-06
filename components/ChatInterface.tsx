@@ -71,7 +71,7 @@ export default function ChatInterface() {
       <div className=" p-6 flex-1 flex flex-col">
         <ScrollArea className="flex-1  mb-4 space-y-4">
           {chatState.messages.length === 0 ? (
-            <div className="text-center text-gray-500 my-10">
+            <div className="text-center text-gray-500">
               <p>Start a conversation with the AI</p>
             </div>
           ) : (
