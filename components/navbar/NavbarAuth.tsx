@@ -11,23 +11,24 @@ const NavbarAuth = async () => {
       {session && session?.user ? (
         <Popover>
           <PopoverTrigger>
-            <Avatar className="size-12">
+            <Avatar className="size-12 cursor-pointer">
               <AvatarImage
                 src={session?.user?.image || ""}
                 alt={session?.user?.image || ""}
               ></AvatarImage>
             </Avatar>
           </PopoverTrigger>
-          <PopoverContent className="flex flex-col w-auto gap-2">
+          <PopoverContent className="flex flex-col w-auto gap-2 hover:bg-bg transition-all duration-500 cursor-pointer">
             <form
               action={async () => {
                 "use server";
                 await signOut();
               }}
             >
-              <button type="submit">SignOut</button>
+              <button type="submit" className="cursor-pointer">
+                Logout
+              </button>
             </form>
-            <button>dfgdfg</button>
           </PopoverContent>
         </Popover>
       ) : (
@@ -37,7 +38,12 @@ const NavbarAuth = async () => {
             await signIn("github");
           }}
         >
-          <button type="submit">SignIn</button>
+          <button
+            type="submit"
+            className="hover:bg-accent hover:text-black transition-all duration-500 rounded-md px-3 py-1.5"
+          >
+            Login
+          </button>
         </form>
       )}
     </div>

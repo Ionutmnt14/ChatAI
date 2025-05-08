@@ -1,70 +1,13 @@
 "use client";
 
-import { useState, useCallback } from "react";
 import ChatInput from "./ChatInput";
-import { ChatState, Message } from "@/lib/types";
 import ChatMessage from "./ChatMessageComponent";
 import { Scroll } from "lucide-react";
 import { ScrollArea } from "../ui/scroll-area";
-
-const API_URL = "/api/chat";
+import { useChat } from "@/hooks/general";
 
 export default function ChatInterface() {
-  const [chatState, setChatState] = useState<ChatState>({
-    messages: [],
-    isLoading: false,
-    error: null,
-  });
-
-  const sendMessage = useCallback(
-    async (content: string) => {
-      const userMessage: Message = { role: "user", content };
-
-      setChatState((prev) => ({
-        ...prev,
-        messages: [...prev.messages, userMessage],
-        isLoading: true,
-        error: null,
-      }));
-
-      try {
-        const response = await fetch(API_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            messages: [...chatState.messages, userMessage],
-          }),
-        });
-
-        if (!response.ok) {
-          const error = await response.json();
-          throw new Error(error.error || "Failed to get response");
-        }
-
-        const data = await response.json();
-        const aiMessage: Message = {
-          role: "assistant",
-          content: data.response,
-        };
-
-        setChatState((prev) => ({
-          ...prev,
-          messages: [...prev.messages, aiMessage],
-          isLoading: false,
-        }));
-      } catch (error) {
-        setChatState((prev) => ({
-          ...prev,
-          isLoading: false,
-          error:
-            error instanceof Error
-              ? error.message
-              : "An unexpected error occurred",
-        }));
-      }
-    },
-    [chatState.messages]
-  );
+  const { chatState, sendMessage } = useChat();
 
   return (
     <div className="flex flex-col h-[90vh] w-full mx-auto p-4">
