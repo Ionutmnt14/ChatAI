@@ -4,8 +4,8 @@ import { useState, useCallback } from "react";
 import ChatInput from "./ChatInput";
 import { ChatState, Message } from "@/lib/types";
 import ChatMessage from "./ChatMessageComponent";
-import { ScrollArea } from "./ui/scroll-area";
 import { Scroll } from "lucide-react";
+import { ScrollArea } from "../ui/scroll-area";
 
 const API_URL = "/api/chat";
 

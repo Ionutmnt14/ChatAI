@@ -1,5 +1,5 @@
-import ChatInterface from "@/components/ChatInterface";
-import Navbar from "@/components/Navbar";
+import ChatInterface from "@/components/chat/ChatInterface";
+import Navbar from "@/components/navbar/Navbar";
 import { AppSidebar } from "@/components/sidebar/Sidebar";
 import { SidebarProvider } from "@/components/ui/sidebar";
 
